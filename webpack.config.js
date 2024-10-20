@@ -12,6 +12,7 @@ module.exports = {
   devServer: {
     static: "./dist",
     historyApiFallback: true,
+    port: 3000,
   },
   module: {
     rules: [
