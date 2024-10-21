@@ -7,6 +7,7 @@ import { popularStockSymbols } from "./utils/popular-stocks";
 import StockList from "./components/stock-list";
 import Filter from "./components/filter";
 import Sorter from "./components/sorter";
+import "./styles/app.scss";
 
 const fetchStockData = async () => {
   try {
@@ -58,7 +59,6 @@ const App: React.FC = () => {
     } else dispatch(setError("Error fetching stock data!"));
   }, [stockData]);
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching stock data!</div>;
 
   const filteredStocks =
@@ -76,8 +76,16 @@ const App: React.FC = () => {
   return (
     <div className="container">
       <h1>Price Pulse</h1>
+
       <Filter onFilterChange={setFilterThreshold} />
       <Sorter onSortChange={setSortBy} />
+
+      {isLoading && (
+        <div className="loading-container">
+          Loading...
+          <div className="loading-spinner"></div>
+        </div>
+      )}
       <StockList stocks={sortedStocks} />
     </div>
   );
