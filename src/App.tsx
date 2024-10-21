@@ -6,6 +6,7 @@ import { setStocks, setError } from "./store/stockSlice";
 import { popularStockSymbols } from "./utils/popular-stocks";
 import StockList from "./components/stock-list";
 import Filter from "./components/filter";
+import Sorter from "./components/sorter";
 
 const fetchStockData = async () => {
   try {
@@ -37,6 +38,7 @@ const fetchStockData = async () => {
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const [filterThreshold, setFilterThreshold] = useState<number>(0);
+  const [sortBy, setSortBy] = useState<string>("currentPrice");
 
   const {
     data: stockData,
@@ -62,11 +64,21 @@ const App: React.FC = () => {
   const filteredStocks =
     stockData?.filter((stock) => stock.percentChange >= filterThreshold) || [];
 
+  const sortedStocks = filteredStocks.sort((a, b) => {
+    if (sortBy === "currentPrice") {
+      return a.currentPrice - b.currentPrice;
+    } else if (sortBy === "percentChange") {
+      return a.percentChange - b.percentChange;
+    }
+    return 0;
+  });
+
   return (
     <div>
       <h1>Price Pulse</h1>
       <Filter onFilterChange={setFilterThreshold} />
-      <StockList stocks={filteredStocks!} />
+      <Sorter onSortChange={setSortBy} />
+      <StockList stocks={sortedStocks} />
     </div>
   );
 };
