@@ -1,5 +1,6 @@
 import axios from "axios";
 import { popularStockSymbols } from "./popular-stocks";
+import { mockStockData } from "./mock";
 
 export const fetchStockData = async () => {
   try {
@@ -26,4 +27,8 @@ export const fetchStockData = async () => {
   } catch (error) {
     console.error("Error fetching stock data:", error);
   }
+};
+
+export const fetchStockDataMock = async () => {
+  return mockStockData;
 };

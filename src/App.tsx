@@ -8,7 +8,7 @@ import StockList from "./components/stock-list";
 import Filter from "./components/filter";
 import Sorter from "./components/sorter";
 import "./styles/app.scss";
-import { fetchStockData } from "./utils/fetch-stock-data";
+import { fetchStockData, fetchStockDataMock } from "./utils/fetch-stock-data";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const App: React.FC = () => {
     isLoading,
   } = useQuery({
     queryKey: ["stocks"],
-    queryFn: fetchStockData,
+    queryFn: fetchStockDataMock,
 
     // refetchInterval: 5000,
   });
