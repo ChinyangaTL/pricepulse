@@ -34,8 +34,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html", // Source of your HTML file
-      filename: "index.html", // Output file in 'dist'
+      template: "./public/index.html",
+      filename: "index.html",
     }),
   ],
 };
