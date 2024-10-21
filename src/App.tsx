@@ -74,7 +74,7 @@ const App: React.FC = () => {
   });
 
   return (
-    <div>
+    <div className="container">
       <h1>Price Pulse</h1>
       <Filter onFilterChange={setFilterThreshold} />
       <Sorter onSortChange={setSortBy} />
