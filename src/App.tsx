@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setStocks, setError } from "./store/stockSlice";
 import { popularStockSymbols } from "./utils/popular-stocks";
 import StockList from "./components/stock-list";
+import Filter from "./components/filter";
 
 const fetchStockData = async () => {
   try {
@@ -35,6 +36,7 @@ const fetchStockData = async () => {
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
+  const [filterThreshold, setFilterThreshold] = useState<number>(0);
 
   const {
     data: stockData,
@@ -57,10 +59,14 @@ const App: React.FC = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching stock data!</div>;
 
+  const filteredStocks =
+    stockData?.filter((stock) => stock.percentChange >= filterThreshold) || [];
+
   return (
     <div>
       <h1>Price Pulse</h1>
-      <StockList stocks={stockData!} />
+      <Filter onFilterChange={setFilterThreshold} />
+      <StockList stocks={filteredStocks!} />
     </div>
   );
 };
