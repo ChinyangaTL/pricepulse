@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Stock {
+export interface Stock {
   symbol: string;
-  price: number;
-  percentageChange: number;
+  currentPrice: number;
+  change: number;
+  percentChange: number;
+  highPrice: number;
+  lowPrice: number;
+  openPrice: number;
+  previousClosePrice: number;
 }
 
 interface StocksState {
