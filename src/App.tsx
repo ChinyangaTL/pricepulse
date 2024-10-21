@@ -7,7 +7,7 @@ import { setStocks, setError } from "./store/stockSlice";
 const fetchStockData = async () => {
   try {
     const response = await axios.get(
-      `https://finnhub.io/api/v1/quote?symbol=AAPL&token=${process.env.REACT_APP_FINNHUB_API_KEY}`
+      `https://finnhub.io/api/v1/quote?symbol=AAPL&token=${process.env.REACT_APP_FINNHUB}`
     );
     return response.data;
   } catch (error) {
