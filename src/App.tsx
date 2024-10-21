@@ -59,8 +59,6 @@ const App: React.FC = () => {
     } else dispatch(setError("Error fetching stock data!"));
   }, [stockData]);
 
-  if (error) return <div>Error fetching stock data!</div>;
-
   const filteredStocks =
     stockData?.filter((stock) => stock.percentChange >= filterThreshold) || [];
 
@@ -84,6 +82,12 @@ const App: React.FC = () => {
         <div className="loading-container">
           Loading...
           <div className="loading-spinner"></div>
+        </div>
+      )}
+
+      {error && (
+        <div className="error-container">
+          Error fetching stock data: {error.message}
         </div>
       )}
       <StockList stocks={sortedStocks} />
