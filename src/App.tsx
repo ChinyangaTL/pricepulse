@@ -59,6 +59,23 @@ const App: React.FC = () => {
     } else dispatch(setError("Error fetching stock data!"));
   }, [stockData]);
 
+  useEffect(() => {
+    const savedFilter = localStorage.getItem("filterThreshold");
+    const savedSort = localStorage.getItem("sortBy");
+
+    if (savedFilter) {
+      setFilterThreshold(Number(savedFilter));
+    }
+    if (savedSort) {
+      setSortBy(savedSort);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("filterThreshold", filterThreshold.toString());
+    localStorage.setItem("sortBy", sortBy);
+  }, [filterThreshold, sortBy]);
+
   const filteredStocks =
     stockData?.filter((stock) => stock.percentChange >= filterThreshold) || [];
 

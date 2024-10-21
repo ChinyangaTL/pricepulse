@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/filter.scss";
 
 interface FilterProps {
@@ -13,6 +13,13 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
     setThreshold(value);
     onFilterChange(value);
   };
+
+  useEffect(() => {
+    const savedThreshold = localStorage.getItem("filterThreshold");
+    if (savedThreshold) {
+      setThreshold(Number(savedThreshold));
+    }
+  }, []);
 
   return (
     <div className="filter-container">
