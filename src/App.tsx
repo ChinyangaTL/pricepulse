@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setStocks, setError } from "./store/stockSlice";
 import { popularStockSymbols } from "./utils/popular-stocks";
+import StockList from "./components/stock-list";
 
 const fetchStockData = async () => {
   try {
@@ -47,8 +48,10 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    if (stockData) dispatch(setStocks(stockData));
-    else dispatch(setError("Error fetching stock data!"));
+    if (stockData) {
+      console.log(stockData);
+      dispatch(setStocks(stockData));
+    } else dispatch(setError("Error fetching stock data!"));
   }, [stockData]);
 
   if (isLoading) return <div>Loading...</div>;
@@ -57,6 +60,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h1>Price Pulse</h1>
+      <StockList stocks={stockData!} />
     </div>
   );
 };
