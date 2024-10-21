@@ -1,5 +1,6 @@
 import React from "react";
 import { Stock } from "../store/stockSlice";
+import "../styles/stock-list.scss";
 
 interface StockListProps {
   stocks: Stock[];
@@ -12,10 +13,17 @@ const StockList: React.FC<StockListProps> = ({ stocks }) => {
         <li key={stock.symbol}>
           <span>{stock.symbol}</span>
           <div>
-            <strong>Current Price:</strong> ${stock.currentPrice.toFixed(2)}{" "}
+            <strong>Current Price:</strong> ${stock.currentPrice.toFixed(2)}
             <br />
-            <strong>Change:</strong> {stock.change.toFixed(2)} <br />
-            <strong>Percent Change:</strong> {stock.percentChange.toFixed(2)}%{" "}
+            <strong>Change:</strong>
+            <span className={stock.change > 0 ? "positive" : "negative"}>
+              {stock.change.toFixed(2)}
+            </span>
+            <br />
+            <strong>Percent Change:</strong>
+            <span className={stock.percentChange > 0 ? "positive" : "negative"}>
+              {stock.percentChange.toFixed(2)}%
+            </span>
             <br />
             <strong>High Price:</strong> ${stock.highPrice.toFixed(2)} <br />
             <strong>Low Price:</strong> ${stock.lowPrice.toFixed(2)} <br />

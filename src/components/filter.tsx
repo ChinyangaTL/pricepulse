@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/filter.scss";
 
 interface FilterProps {
   onFilterChange: (threshold: number) => void;
@@ -14,7 +15,7 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div>
+    <div className="filter-container">
       <label>Filter by Minimum Percentage Change:</label>
       <input
         type="number"

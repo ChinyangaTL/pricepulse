@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/sorter.scss";
 
 interface SorterProps {
   onSortChange: (sortBy: string) => void;
@@ -10,7 +11,7 @@ const Sorter: React.FC<SorterProps> = ({ onSortChange }) => {
   };
 
   return (
-    <div>
+    <div className="sorting-container">
       <label>Sort by:</label>
       <select onChange={handleSortChange}>
         <option value="currentPrice">Current Price</option>
