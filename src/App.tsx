@@ -28,7 +28,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (stockData) {
-      console.log(stockData);
       dispatch(setStocks(stockData));
     } else dispatch(setError("Error fetching stock data!"));
   }, [stockData]);
