@@ -25,11 +25,12 @@ $ npm install
 3. Create an env file and paste in
 
 ```
-REACT_APP_FINNHUB=<your finnhub api key>
+FINNHUB_API=<your finnhub api key>
 ```
 
 [Link to Finnhub](https://finnhub.io/)
-(Alternative email me to use mine) 4. Start the project by running
+(Alternative email me to use mine) 
+4. Start the project by running
 
 ```
 $ npm run start
@@ -57,12 +58,6 @@ To assess the candidate’s ability to create functional React components, integ
 - Add functionality to sort stocks by price or percentage change
 - Implement local storage to persist the user’s filter settings
 
-### Screenshot
-
-![](./screenshot.png)
-![](./screenshot-active.png)
-![](./screenshot-mobile.png)
-![](./screenshot-mobile-active.png)
 
 **Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
