@@ -2,9 +2,13 @@ import axios from "axios";
 import { popularStockSymbols } from "./popular-stocks";
 import { mockStockData } from "./mock";
 
-export const fetchStockData = async () => {
+export const fetchStockData = async (startIndex = 0, count = 5) => {
   try {
-    const promises = popularStockSymbols.map((symbol) =>
+    const symbolsToFetch = popularStockSymbols.slice(
+      startIndex,
+      startIndex + count
+    );
+    const promises = symbolsToFetch.map((symbol) =>
       axios.get(
         `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.REACT_APP_FINNHUB}`
       )
