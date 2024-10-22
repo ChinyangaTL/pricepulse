@@ -10,7 +10,7 @@ export const fetchStockData = async (startIndex = 0, count = 5) => {
     );
     const promises = symbolsToFetch.map((symbol) =>
       axios.get(
-        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINNHUB_API}`
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=csaurtpr01qobflkeg50csaurtpr01qobflkeg5g`
       )
     );
 
