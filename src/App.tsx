@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStocks, setError } from "./store/stockSlice";
 import { popularStockSymbols } from "./utils/popular-stocks";
 import StockList from "./components/stock-list";
@@ -9,11 +9,18 @@ import Filter from "./components/filter";
 import Sorter from "./components/sorter";
 import "./styles/app.scss";
 import { fetchStockData, fetchStockDataMock } from "./utils/fetch-stock-data";
+import { mockStockData } from "./utils/mock";
+import { RootState } from "./store/store";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const [filterThreshold, setFilterThreshold] = useState<number>(0);
   const [sortBy, setSortBy] = useState<string>("currentPrice");
+  const [loadedCount, setLoadedCount] = useState<number>(5);
+
+  const { stocks: reduxStockData } = useSelector(
+    (state: RootState) => state.stocks
+  );
 
   const {
     data: stockData,
@@ -21,7 +28,7 @@ const App: React.FC = () => {
     isLoading,
   } = useQuery({
     queryKey: ["stocks"],
-    queryFn: fetchStockDataMock,
+    queryFn: () => fetchStockData(0, 5),
 
     // refetchInterval: 5000,
   });
@@ -50,7 +57,8 @@ const App: React.FC = () => {
   }, [filterThreshold, sortBy]);
 
   const filteredStocks =
-    stockData?.filter((stock) => stock.percentChange >= filterThreshold) || [];
+    reduxStockData?.filter((stock) => stock.percentChange >= filterThreshold) ||
+    [];
 
   const sortedStocks = filteredStocks.sort((a, b) => {
     if (sortBy === "currentPrice") {
@@ -60,6 +68,15 @@ const App: React.FC = () => {
     }
     return 0;
   });
+
+  const handleLoadMore = () => {
+    const mockStocksToAdd = mockStockData.slice(0, 5);
+    const newStocks = [...filteredStocks, ...mockStocksToAdd];
+    dispatch(setStocks(newStocks));
+    setLoadedCount((prevCount) =>
+      Math.min(prevCount + 5, stockData!.length + mockStockData.length)
+    );
+  };
 
   return (
     <div className="container">
@@ -81,6 +98,9 @@ const App: React.FC = () => {
         </div>
       )}
       <StockList stocks={sortedStocks} />
+      {loadedCount < popularStockSymbols.length && (
+        <button onClick={handleLoadMore}>Load More</button>
+      )}
     </div>
   );
 };

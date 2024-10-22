@@ -4,10 +4,9 @@ export const popularStockSymbols = [
   "GOOGL", // Alphabet Inc.
   "AMZN", // Amazon.com, Inc.
   "TSLA", // Tesla, Inc.
+  "FB", // Meta Platforms, Inc.
+  "NFLX", // Netflix, Inc.
+  "NVDA", // NVIDIA Corporation
+  "BRK.B", // Berkshire Hathaway Inc.
+  "DIS", // The Walt Disney Company
 ];
-
-// "FB", // Meta Platforms, Inc.
-//   "NFLX", // Netflix, Inc.
-//   "NVDA", // NVIDIA Corporation
-//   "BRK.B", // Berkshire Hathaway Inc.
-//   "DIS", // The Walt Disney Company
